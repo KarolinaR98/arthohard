@@ -1,0 +1,364 @@
+:root {
+    --background-color-desktop: #F6F6F6;
+    --background-color-mobile: #F1F1F1;
+    --white: #FFF;
+
+    --black: #111;
+    --green: #30AB4C;
+    --burgundy: #AD4844;
+    --silver: #D9D9D9;
+}
+
+body {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", serif; /*free font used instead of futura pt*/
+    color: var(--black);
+    background-color: var(--background-color);
+    overflow-x: hidden;
+}
+
+section {
+    text-align: center;
+}
+
+.container {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.btn {
+    padding: 10px 40px;
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    color: var(--background-color-desktop);
+    border: none;
+    cursor: pointer;
+}
+
+.burgundy-text {
+    color: var(--burgundy);
+}
+
+.green {
+    background-color: var(--green);
+}
+
+.burgundy {
+    background-color: var(--burgundy);
+}
+
+/*navbar*/
+.menu-overlay.active {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    background-color: rgba( 255, 255, 255, 0.75)
+}
+
+.main-nav {
+    padding: 33px 0;
+    background-color: var(--white);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.nav-content {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.menu-bar {
+    visibility: hidden;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin-left: 25%;
+    gap: 40px;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: inherit;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.menu-mobile {
+    display: none;
+    list-style: none;
+}
+
+/*main header*/
+.main-header {
+    position: relative;
+}
+
+.header-content {
+    position: relative;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.product-image {
+    max-width: 50%;
+    height: auto;
+}
+
+.product-info {
+    margin-top: 180px;
+}
+
+.product-name {
+    font-size: 6vw;
+    text-transform: uppercase;
+    font-weight: 450;
+    margin-bottom: 33px;
+}
+
+.product-description-1 {
+    font-size: 2.5vw;
+    font-weight: 450;
+    color: transparent;
+    background-image: linear-gradient(90.01deg, #111111 -8.85%, #B1B1B1 116.12%);
+    background-clip: text;
+    margin-bottom: 20px;
+}
+
+.product-description-2 {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.ornament {
+    position: absolute;
+    z-index: -1;
+}
+
+.ornament-1 {    
+    right: -2%;
+    top: 80%;
+    transform: rotate(20deg);
+    width: 150px; 
+    max-width: 15%;   
+}
+
+.ornament-2 {
+    left: -9%;
+    top: 87%;
+    transform: rotate(120deg);
+    width: 320px;
+    max-width: 30%;
+}
+
+.ornament-3 {
+    right: -2%;
+    top: 105%;
+    width: 320px;
+    max-width: 30%;
+}
+
+/*sections*/
+.sub-header, .section-header {
+    position: relative;
+}
+
+.section-name{
+    color: transparent;
+    background-image: linear-gradient(90.01deg, #111111 -8.85%, #B1B1B1 58.84%, #696969 91.39%, #B1B1B1 116.12%);
+    background-clip: text;
+    font-size: 2.5vw;
+}
+
+.section-name, .feature-name {
+    font-weight: 450;
+}
+
+.section-header, .feature-name {
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.underline {
+    width: 126px;
+    height: 1px;
+    background-color: var(--black);
+    position: absolute;
+    right: calc(50% - 63px);
+}
+
+.digit {
+    display: inline-block;
+    width: 2.5vw;
+    height: 2.5vw;
+    background-color: var(--white);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+    line-height: 2.5vw;
+    text-align: center;
+    margin-right: 20px;
+}
+
+
+/*product features section*/
+
+#product-features-section {
+    margin: 100px auto;
+}
+
+#product-features-section .section-header {
+    margin-bottom: 135px;
+}
+
+.product-features {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-feature {
+    width: 28%;
+    display: flex;
+    flex-direction: column;
+}
+
+#product-features-section .sub-header {
+    margin-bottom: 50px;
+}
+
+.feature-name {
+    font-size: 1.5vw;
+}
+
+.text-content {
+    flex: 1 0 auto;
+    margin-bottom: 50px;
+}
+
+.feature-description, .subpoint {
+    font-size: 1.2vw;
+}
+
+.align-start {
+    text-align: left;
+}
+
+.feature-image {
+    width: 100%;
+}
+
+.feature-images-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.feature-image-2 {
+    display: inline-block;
+    width: 47%;
+}
+
+
+
+@media (max-width: 1025px) {
+    /*navbar*/
+    .nav-content {
+        justify-content: space-between;
+        width: 85%;
+    }
+
+    .menu {
+        margin-left: 0;
+    }
+
+    /*main header*/
+    .header-content {
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .product-info {
+        margin-top: 0px;
+    }
+
+    .product-description-1 {
+        font-size: 20px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    body {
+        background-color: var(--background-color-mobile);
+    }
+
+    /*navbar*/
+    .main-nav {
+        padding: 15px 0;
+        background-color: inherit;
+        box-shadow: none;
+    }
+
+    .nav-content {
+        width: 95%;
+    }
+
+    .menu-bar {
+        visibility: visible;
+        color: var(--burgundy);
+        font-size: 29px;
+        z-index: 3;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .menu-mobile.collapse{
+        position: absolute;
+        top: 60px;
+        display: block;
+        width: 95%;
+        margin: 0 auto;
+        padding: 20px 0;
+        background-color: var(--burgundy);
+        color: var(--silver);
+        text-align: center;
+        z-index: 3;
+    }
+
+    .menu-item {
+        padding-bottom: 13px;
+    }
+
+}
+
+@media (max-width: 576px) {
+    /*navbar*/
+    .logo {
+        width: 94px;
+        height: 12px;
+    }
+
+    .menu-bar {
+        font-size: 18px;
+    }
+
+    .menu-mobile.collapse{
+        top: 45px;
+    }
+
+    .menu-item a {
+        font-size: 13px;
+    }
+}
