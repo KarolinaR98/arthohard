@@ -9,6 +9,10 @@
     --silver: #D9D9D9;
 }
 
+body, html {
+    overflow-x: hidden ;
+}
+
 body {
     box-sizing: border-box;
     padding: 0;
@@ -17,7 +21,6 @@ body {
     /*free font used instead of futura pt*/
     color: var(--black);
     background-color: var(--background-color-desktop);
-    overflow-x: hidden;
 }
 
 section {
@@ -135,9 +138,8 @@ section {
 .product-description-1 {
     font-size: clamp(1.5rem, 2.5vw, 5rem);
     font-weight: 450;
-    color: transparent;
     -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(90.01deg, #111111 -8.85%, #B1B1B1 116.12%);
+    background: -webkit-linear-gradient(90.01deg, #111111 -8.85%, #B1B1B1 116.12%);
     background-clip: text;
     -webkit-background-clip: text;
     margin-bottom: 20px;
