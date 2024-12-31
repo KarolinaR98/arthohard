@@ -213,6 +213,10 @@ section {
     margin-right: 20px;
 }
 
+.mobile-only {
+    display: none;
+}
+
 
 /*product features section*/
 
@@ -337,6 +341,10 @@ section {
     border-radius: 50%;
 }
 
+.ingredient-icon {
+    display: none;
+}
+
 .composition-product-image {
     width: 90%;
     max-width: 1200px;
@@ -345,6 +353,10 @@ section {
 .dog-img {
     width: 70%;
     margin-bottom: -7px;
+}
+
+.mobile-bottle, .mobile-dog {
+    display: none;
 }
 
 /*products section*/
@@ -368,6 +380,7 @@ section {
     font-weight: 700;
     color: var(--white);
     padding: 10px;
+    cursor: pointer;
 }
 
 .products-wrapper {
@@ -502,6 +515,10 @@ section {
         line-height: 2.5rem;
     }
 
+    .mobile-only {
+        display: block;
+    }
+
     /*product features section*/
 
     .ornament-3 {
@@ -553,7 +570,43 @@ section {
     .row-2 {
         display: none;
     }
-    
+
+    .circle {
+        display: none;
+    }
+
+    .ingredient-icon {
+        display: inline-block;
+    }
+
+    .dog-img {
+        display: none;
+    }
+
+    .mobile-bottle, .mobile-dog {
+        display: block;
+        background-image: url('/assets/ornament-2.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 80%;
+    }
+
+    .mobile-dog {
+        padding-top: 100px;
+    }
+
+    .bottle-img {
+        width: 300px;
+        height: 600px;
+    }
+
+    .dog-img-2 {
+        display: inline-block;
+        width: 450px;
+        height: 250px;
+        margin-bottom: -7px;
+    }
+        
 
 }
 
@@ -580,4 +633,20 @@ section {
     .menu-item a {
         font-size: 13px;
     }
+
+    /*product-composition-section*/
+    .bottle-img {
+        width: 200px;
+        height: 400px;
+    }
+
+    .dog-img-2 {
+        width: 350px;
+        height: 200px;
+    }
+
+    .mobile-dog {
+        padding-top: 50px;
+    }
+
 }
