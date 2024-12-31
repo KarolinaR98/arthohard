@@ -136,8 +136,10 @@ section {
     font-size: clamp(1.5rem, 2.5vw, 5rem);
     font-weight: 450;
     color: transparent;
+    -webkit-text-fill-color: transparent;
     background-image: linear-gradient(90.01deg, #111111 -8.85%, #B1B1B1 116.12%);
     background-clip: text;
+    -webkit-background-clip: text;
     margin-bottom: 20px;
 }
 
