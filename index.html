@@ -22,14 +22,15 @@
             <p class="logo">Arthro<span class="burgundy-text">hard</span></p>
             <i class="menu-bar fa-solid fa-bars"></i>
             <ul class="menu">
-                <li class="menu-item"><a href="#">Co nas wyróżnia</a></li>
-                <li class="menu-item"><a href="#">Skład</a></li>
-                <li class="menu-item"><a href="#">Produkty</a></li>
+                <li class="menu-item hover-underline-animation"><a href="#product-features-section">Co nas wyróżnia</a>
+                </li>
+                <li class="menu-item hover-underline-animation"><a href="#product-composition-section">Skład</a></li>
+                <li class="menu-item hover-underline-animation"><a href="#products-section">Produkty</a></li>
             </ul>
             <ul class="menu-mobile">
-                <li class="menu-item"><a href="#">Działanie preparatu</a></li>
-                <li class="menu-item"><a href="#">Zalecenia</a></li>
-                <li class="menu-item"><a href="#">Skład</a></li>
+                <li class="menu-item"><a href="#product-functions-section">Działanie preparatu</a></li>
+                <li class="menu-item"><a href="#product-features-section">Zalecenia</a></li>
+                <li class="menu-item"><a href="#product-composition-section">Skład</a></li>
                 <li class="menu-item"><a href="#">Dawkowanie</a></li>
                 <li class="menu-item"><a href="#">Opinie</a></li>
             </ul>
@@ -48,12 +49,12 @@
                 <button class="btn green">Kup teraz</button>
             </div>
         </div>
-        <img class="ornament ornament-1" src="assets/ornament-1.png">
-        <img class="ornament ornament-2" src="assets/ornament-1.png">
+        <img class="ornament ornament-1" src="assets/ornament-1.png" alt="Ornament">
+        <img class="ornament ornament-2" src="assets/ornament-1.png" alt="Ornament">
     </header>
 
     <section id="product-features-section" class="container">
-        <img class="ornament ornament-3" src="assets/ornament-1.png">
+        <img class="ornament ornament-3" src="assets/ornament-1.png" alt="Ornament">
         <header class="section-header">
             <h2 class="section-name">Co wyróżnia nasz preparat</h2>
             <div class="underline"></div>
@@ -71,7 +72,13 @@
                         z lekarzami weterynarii, przynoszą szybkie
                         i zauważalne efekty, szczególnie korzystne dla zwierząt z poważnymi problemami stawowymi.</p>
                 </div>
-                <img class="feature-image" src="assets/feature-1.png" alt="">
+                <div class="feature-image-wrapper hover-underline-animation">
+                    <img class="ornament feature-image-ornament-left desktop-only" src="assets/ornament-3.png"
+                        alt="Ornament">
+                    <img class="ornament feature-image-ornament-right desktop-only" src="assets/ornament-3.png"
+                        alt="Ornament">
+                    <img class="feature-image" src="assets/feature-1.png" alt="Product Feature">
+                </div>
             </div>
             <div class="product-feature">
                 <header class="sub-header">
@@ -83,9 +90,13 @@
                     <p class="subpoint"><span class="digit">1</span>Bezpośrednio do pyszczka</p>
                     <p class="subpoint"><span class="digit">2</span>Zmieszany z karmą</p>
                 </div>
-                <div class="feature-images-wrapper">
-                    <img class="feature-image-2" src="assets/feature-2.png" alt="">
-                    <img class="feature-image-2" src="assets/feature-3.png" alt="">
+                <div class="feature-image-wrapper feature-images-wrapper hover-underline-animation">
+                    <img class="ornament feature-image-ornament-left desktop-only" src="assets/ornament-3.png"
+                        alt="Ornament">
+                    <img class="ornament feature-image-ornament-right desktop-only" src="assets/ornament-3.png"
+                        alt="Ornament">
+                    <img class="feature-image-2" src="assets/feature-2.png" alt="Product Feature">
+                    <img class="feature-image-2" src="assets/feature-3.png" alt="Product Feature">
                 </div>
             </div>
             <div class="product-feature">
@@ -100,10 +111,35 @@
                         że Twoje zwierzę otrzymuje wszystko, czego potrzebuje, aby cieszyć się zdrowiem i aktywnością na
                         długo. Skorzystaj z zalet Arthrohard i zobacz różnicę w komforcie życia swojego zwierzęcia.</p>
                 </div>
-                <img class="feature-image" src="assets/feature-4.png" alt="">
+                <div class="feature-image-wrapper hover-underline-animation">
+                    <img class="ornament feature-image-ornament-left desktop-only" src="assets/ornament-3.png"
+                        alt="Ornament">
+                    <img class="ornament feature-image-ornament-right desktop-only" src="assets/ornament-3.png"
+                        alt="Ornament">
+                    <img class="feature-image" src="assets/feature-4.png" alt="Product Feature">
+                </div>
+
             </div>
         </div>
     </section>
+
+    <div class="background-color-white mobile-only">
+        <section id="product-functions-section" class="container">
+            <header class="section-header">
+                <h2 class="section-name">Działanie preparatu</h2>
+                <div class="underline"></div>
+            </header>
+            <div class="product-functions">
+                <p class="product-function subpoint"><span class="digit">1</span>Wsparcie rozwoju chrząstki stawowej</p>
+                <p class="product-function subpoint"><span class="digit">2</span>Działanie chondroprotekcyjne</p>
+                <p class="product-function subpoint"><span class="digit">3</span>Zmniejszenie stanu zapalnego i bólu</p>
+                <p class="product-function subpoint"><span class="digit">4</span>Wzmocnienie stawów</p>
+                <p class="product-function subpoint"><span class="digit">5</span>Ochrona przed mikrourazami</p>
+                <p class="product-function subpoint"><span class="digit">6</span>Regeneracja po urazach
+                <p class="product-function subpoint"><span class="digit">7</span>Poprawa jakości życia</p>
+            </div>
+        </section>
+    </div>
 
     <div class="background-color-white parralax-container">
         <section id="product-composition-section" class="container">
@@ -121,7 +157,7 @@
                         <span class="circle"></span>
                         <img class="ingredient-icon" src="assets/device-icon.png" alt="Ingredient">
                         <header class="sub-header">
-                            <h3 class="ingredient-name">Siarczan glukozaminy</h3>
+                            <h3 class="ingredient-name hover-underline-animation">Siarczan glukozaminy</h3>
                         </header>
                         <div class="text-content">
                             <p class="ingredient-quantity">650 mg</p>
@@ -137,7 +173,7 @@
                         <span class="circle"></span>
                         <img class="ingredient-icon" src="assets/device-icon.png" alt="Ingredient">
                         <header class="sub-header">
-                            <h3 class="ingredient-name">Siarczan chondroityny</h3>
+                            <h3 class="ingredient-name hover-underline-animation">Siarczan chondroityny</h3>
                         </header>
                         <div class="text-content">
                             <p class="ingredient-quantity">300 mg</p>
@@ -150,7 +186,7 @@
                         <span class="circle"></span>
                         <img class="ingredient-icon" src="assets/vessel-icon.png" alt="Ingredient">
                         <header class="sub-header">
-                            <h3 class="ingredient-name">Kwas hialuronowy</h3>
+                            <h3 class="ingredient-name hover-underline-animation">Kwas hialuronowy</h3>
                         </header>
                         <div class="text-content">
                             <p class="ingredient-quantity">50 mg</p>
@@ -172,7 +208,7 @@
                         <span class="circle"></span>
                         <img class="ingredient-icon" src="assets/grass-icon.png" alt="Ingredient">
                         <header class="sub-header">
-                            <h3 class="ingredient-name">Czarci pazur</h3>
+                            <h3 class="ingredient-name hover-underline-animation">Czarci pazur</h3>
                         </header>
                         <div class="text-content">
                             <p class="ingredient-quantity">250 mg</p>
@@ -184,9 +220,9 @@
                     </div>
                     <div class="ingredient">
                         <span class="circle"></span>
-                        <img class="ingredient-icon" src="assets/C-icon.png" alt="Ingredient">
+                        <img class="ingredient-icon" src="assets/c-icon.png" alt="Ingredient">
                         <header class="sub-header">
-                            <h3 class="ingredient-name">Witamina C</h3>
+                            <h3 class="ingredient-name hover-underline-animation">Witamina C</h3>
                         </header>
                         <div class="text-content">
                             <p class="ingredient-quantity">50 mg</p>
@@ -201,7 +237,7 @@
                         <span class="circle"></span>
                         <img class="ingredient-icon" src="assets/sign-icon.png" alt="Ingredient">
                         <header class="sub-header">
-                            <h3 class="ingredient-name">MSM</h3>
+                            <h3 class="ingredient-name hover-underline-animation">MSM</h3>
                         </header>
                         <div class="text-content">
                             <p class="ingredient-quantity">250 mg</p>
@@ -217,7 +253,7 @@
                         <span class="circle"></span>
                         <img class="ingredient-icon" src="assets/drop-icon.png" alt="Ingredient">
                         <header class="sub-header">
-                            <h3 class="ingredient-name">Syrop glukozowo
+                            <h3 class="ingredient-name hover-underline-animation">Syrop glukozowo
                                 - fruktozowy</h3>
                         </header>
                         <div class="text-content">
