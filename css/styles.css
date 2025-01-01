@@ -82,6 +82,14 @@ section {
     align-items: center;
 }
 
+.logo {
+    padding: 0;
+    margin: 0;
+    font-weight: 450;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
 .menu-bar {
     visibility: hidden;
 }
@@ -129,7 +137,7 @@ section {
 }
 
 .product-name {
-    font-size: clamp(2.5em, 6vw, 7em);
+    font-size: clamp(2.5rem, 6vw, 7rem);
     text-transform: uppercase;
     font-weight: 450;
     margin-bottom: 33px;
@@ -309,8 +317,13 @@ section {
     margin-bottom: 120px;
 }
 
+.header-composition-wrapper {
+    position: relative;
+    margin-bottom: 70px;
+}
+
 .header-composition-txt {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .ingredients-wrappers {
@@ -425,10 +438,14 @@ section {
         width: 95%;
     }
 
+    .logo {
+        font-size: 1.8rem;
+    }
+
     .menu-bar {
         visibility: visible;
         color: var(--burgundy);
-        font-size: 29px;
+        font-size: 1.8rem;
         z-index: 3;
     }
 
@@ -518,6 +535,8 @@ section {
         width: 2.5rem;
         height: 2.5rem;
         line-height: 2.5rem;
+        font-size: 1.25rem;
+        font-weight: 700;
     }
 
     .mobile-only {
@@ -622,13 +641,8 @@ section {
     }
 
     /*navbar*/
-    .logo {
-        width: 94px;
-        height: 12px;
-    }
-
-    .menu-bar {
-        font-size: 18px;
+    .logo, .menu-bar{
+        font-size: 1.5rem;
     }
 
     .menu-mobile.collapse {
@@ -636,7 +650,32 @@ section {
     }
 
     .menu-item a {
-        font-size: 13px;
+        font-size: 0.8rem;
+    }
+
+     /*main header*/
+
+     .product-description-1 {
+        font-size: 1.25rem;
+    }
+
+    .product-description-2 {
+        font-size: 0.8rem;
+    }
+
+    /*sections*/
+    .section-name,
+    .feature-name,
+    .ingredient-name {
+        font-size: 1.25rem;
+    }
+
+    .feature-description,
+    .subpoint,
+    .header-composition-txt,
+    .ingredient-quantity,
+    .ingredient-description {
+        font-size: 0.8rem;
     }
 
     /*product-composition-section*/
