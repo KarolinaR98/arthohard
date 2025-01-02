@@ -108,7 +108,6 @@ a {
     z-index: 3;
     transition: all 0.3s;
     transition-property: padding, background-color;
-    user-select: none;
 }
 
 .menu-overlay.active {
@@ -151,7 +150,7 @@ a {
 .menu-item a {
     text-transform: uppercase;
     font-size: 1rem;
-
+    user-select: none;
 }
 
 .menu-item a.active {
