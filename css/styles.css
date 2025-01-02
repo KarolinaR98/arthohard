@@ -106,7 +106,8 @@ a {
     width: 100%;
     position: fixed;
     z-index: 3;
-    transition: padding 0.3s;
+    transition: all 0.3s;
+    transition-property: padding, background-color;
     user-select: none;
 }
 
