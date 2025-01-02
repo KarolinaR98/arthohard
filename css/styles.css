@@ -29,6 +29,11 @@ section {
     padding: 100px 0;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .container {
     width: 85%;
     margin: 0 auto;
@@ -48,6 +53,10 @@ section {
     cursor: pointer;
 }
 
+.bold {
+    font-weight: 700;
+}
+
 .burgundy-text {
     color: var(--burgundy);
 }
@@ -64,19 +73,49 @@ section {
     background-color: var(--white);
 }
 
-/*navbar*/
-.menu-overlay.active {
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background-color: rgba(255, 255, 255, 0.75)
+/*underline-animation*/
+.underline-animation {
+    display: inline-block;
+    position: relative;
 }
 
+.underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: bottom center;
+    height: 1px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--black);
+    transition: transform 0.25s ease-out;
+}
+
+.underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom center;
+}
+
+/*navbar*/
 .main-nav {
     padding: 33px 0;
     background-color: var(--white);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    position: fixed;
+    z-index: 3;
+    transition: padding 0.3s;
+    user-select: none;
+}
+
+.menu-overlay.active {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.75)
 }
 
 .nav-content {
@@ -92,6 +131,7 @@ section {
     font-weight: 450;
     font-size: 2rem;
     text-transform: uppercase;
+    transition: 0.3s;
 }
 
 .menu-bar {
@@ -107,11 +147,14 @@ section {
 }
 
 .menu-item a {
-    text-decoration: none;
-    color: inherit;
     text-transform: uppercase;
     font-size: 1rem;
-    user-select: none;
+    
+}
+
+.menu-item a.active {
+    text-decoration: underline;
+    text-underline-offset: 11px;
 }
 
 .menu-mobile {
@@ -122,7 +165,7 @@ section {
 /*main header*/
 .main-header {
     position: relative;
-    padding: 50px 0 100px;
+    padding: 180px 0 100px;
 }
 
 .header-content {
@@ -231,30 +274,6 @@ section {
     margin-right: 20px;
 }
 
-/*hover-underline-animation*/
-.hover-underline-animation {
-    display: inline-block;
-    position: relative;
-  }
-
-  .hover-underline-animation::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    transform-origin: bottom center;
-    height: 1px;
-    bottom: -5px;
-    left: 0;
-    background-color: var(--black);
-    transition: transform 0.25s ease-out;
-  }
-
-  .hover-underline-animation:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom center;
-  }
-
 
 /*product features section*/
 
@@ -319,7 +338,7 @@ section {
 }
 
 .feature-image-ornament-left,
-.feature-image-ornament-right{
+.feature-image-ornament-right {
     width: 80px;
     max-width: 20%;
 }
@@ -346,7 +365,8 @@ section {
 
 .feature-image-2 {
     display: inline-block;
-    width: 47%;
+    width: 48%;
+    height: 97%;
 }
 
 /*product-composition-section*/
@@ -489,6 +509,7 @@ section {
         padding: 15px 0;
         background-color: inherit;
         box-shadow: none;
+        background-color: inherit;
     }
 
     .nav-content {
@@ -504,6 +525,7 @@ section {
         visibility: visible;
         color: var(--burgundy);
         font-size: 1.8rem;
+        cursor: pointer;
         z-index: 3;
     }
 
@@ -528,11 +550,14 @@ section {
         padding-bottom: 13px;
     }
 
-    .menu-item:active {
+    .menu-item:hover,
+    .menu-item a.active {
         color: var(--white);
         text-decoration: underline;
         text-underline-offset: 8px;
+        text-decoration-thickness: 2px;
     }
+
     /*main header*/
 
     .header-content {
@@ -762,10 +787,10 @@ section {
         font-size: 0.8rem;
     }
 
-     /*products-functions-section*/ 
-     .product-functions {
+    /*products-functions-section*/
+    .product-functions {
         width: 100%;
-     }
+    }
 
     /*product-composition-section*/
     .bottle-img {
