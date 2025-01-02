@@ -94,6 +94,7 @@ window.addEventListener("resize", updateNavbar);
 
 window.addEventListener("scroll", updateNavBgColor);
 window.addEventListener("resize", updateNavBgColor);
+
 logo.addEventListener("click", onLogoClick);
 
 window.addEventListener("scroll", updateActiveLink);

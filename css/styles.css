@@ -71,6 +71,7 @@ a {
 
 .background-color-white {
     background-color: var(--white);
+    z-index: 1;
 }
 
 /*underline-animation*/
@@ -149,7 +150,7 @@ a {
 .menu-item a {
     text-transform: uppercase;
     font-size: 1rem;
-    
+
 }
 
 .menu-item a.active {
@@ -615,6 +616,40 @@ a {
         font-size: 1.1rem;
     }
 
+    .sub-header-ornament-left,
+    .sub-header-ornament-right,
+    .section-header-ornament-left,
+    .section-header-ornament-right {
+        width: 150px;
+        max-width: 20%;
+    }
+
+    .sub-header-ornament-left {
+        left: -25%;
+        bottom: 20%;
+        transform: rotate(110deg);
+    }
+
+    .sub-header-ornament-right {
+        top: 30%;
+        right: -22%;
+    }
+
+    .section-header-ornament-left {
+        left: -25%;
+        bottom: 0;
+        transform: rotate(110deg);
+    }
+
+    .section-header-ornament-right {
+        top: 25%;
+        right: -22%;
+    }
+
+    .z-index-zero {
+        z-index: 0;
+    }
+
     .underline {
         width: 140px;
     }
@@ -627,8 +662,8 @@ a {
         font-weight: 700;
     }
 
-    /*product features section*/
 
+    /*product features section*/
     .ornament-3 {
         width: 25%;
         right: -20%;
@@ -785,6 +820,28 @@ a {
     .ingredient-quantity,
     .ingredient-description {
         font-size: 0.8rem;
+    }
+
+    .sub-header-ornament-left {
+        left: -15%;
+    }
+
+    .sub-header-ornament-right {
+        right: -12%;
+    }
+
+    .section-header-ornament-left {
+        left: -15%;
+    }
+
+    .section-header-ornament-right {
+        right: -12%;
+    }
+
+    /*product features section*/
+    .ornament-3 {
+        right: -8%;
+        top: 2%;
     }
 
     /*products-functions-section*/
