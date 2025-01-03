@@ -108,14 +108,15 @@ a {
     z-index: 3;
     transition: all 0.3s;
     transition-property: padding, background-color;
+    user-select: none;
 }
 
 .menu-overlay.active {
     z-index: 2;
-    width: 100%;
-    height: 100%;
-    top: 0;
     position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
     background-color: rgba(255, 255, 255, 0.75)
 }
 
@@ -150,7 +151,6 @@ a {
 .menu-item a {
     text-transform: uppercase;
     font-size: 1rem;
-    user-select: none;
 }
 
 .menu-item a.active {
@@ -166,7 +166,7 @@ a {
 /*main header*/
 .main-header {
     position: relative;
-    padding: 180px 0 100px;
+    padding: 150px 0 100px;
 }
 
 .header-content {
@@ -178,11 +178,11 @@ a {
 
 .product-image {
     max-width: 50%;
-    height: auto;
+    max-height: 90vh;
 }
 
 .product-info {
-    margin-top: 180px;
+    margin-top: 50px;
 }
 
 .product-name {
@@ -340,8 +340,7 @@ a {
 
 .feature-image-ornament-left,
 .feature-image-ornament-right {
-    width: 80px;
-    max-width: 20%;
+    width: 20%;
 }
 
 .feature-image-ornament-left {
@@ -435,12 +434,13 @@ a {
 }
 
 .composition-product-image {
-    width: 90%;
+    width: 80%;
     max-width: 1200px;
 }
 
 .dog-img {
-    width: 70%;
+    width: 60%;
+    max-width: 1200px;
     margin-bottom: -7px;
 }
 
@@ -569,6 +569,7 @@ a {
 
     .product-image {
         max-width: 100%;
+        height: auto;
     }
 
     .product-info {

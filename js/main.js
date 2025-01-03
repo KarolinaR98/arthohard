@@ -1,6 +1,7 @@
 const menuBar = document.querySelector(".menu-bar");
 const mobileMenu = document.querySelector(".menu-mobile");
 const menuOverlay = document.querySelector(".menu-overlay");
+const mobileMenuAnhors = document.querySelectorAll(".menu-mobile a");
 
 const navbar = document.querySelector(".main-nav");
 const logo = document.querySelector(".logo");
@@ -10,11 +11,59 @@ const sections = document.querySelectorAll("section");
 
 const containers = document.querySelectorAll(".container");
 
-//hamburger menu
+//test 
 
-const mobileMenuBehavior = () => {
+let scrollDisabled = false;
+
+const preventScroll = (event) => {
+  if (scrollDisabled) {
+    event.preventDefault();
+  }
+};
+
+const disableScroll = () => {
+  scrollDisabled = true;
+
+  // Prevent scrolling with the mouse or touch
+  window.addEventListener("wheel", preventScroll, { passive: false });
+  window.addEventListener("touchmove", preventScroll, { passive: false });
+
+  // Prevent scrolling with keyboard (arrow keys, space, etc.)
+  window.addEventListener("keydown", (event) => {
+    const keys = [32, 33, 34, 35, 36, 37, 38, 39, 40]; // Space, Page Up/Down, Arrows
+    if (keys.includes(event.keyCode)) {
+      preventScroll(event);
+    }
+  });
+};
+
+const enableScroll = () => {
+  scrollDisabled = false;
+
+  window.removeEventListener("wheel", preventScroll);
+  window.removeEventListener("touchmove", preventScroll);
+  window.removeEventListener("keydown", preventScroll);
+};
+
+//hamburger menu
+const toggleMobileMenu = () => {
   mobileMenu.classList.toggle("collapse");
   menuOverlay.classList.toggle("active");
+
+  if(menuOverlay.classList.contains("active")) {
+    disableScroll()
+    console.log("has class")
+  } else {
+    enableScroll();
+  }
+};
+
+const closeMobileMenu = () => {
+  mobileMenu.classList.remove("collapse");
+  menuOverlay.classList.remove("active");
+  document.body.classList.remove("no-scroll");
+
+  enableScroll();
 };
 
 //navbar size changes
@@ -82,12 +131,18 @@ const updateNavBgColor = () => {
 };
 
 const onLogoClick = () => {
-    if (window.innerWidth > 996) return;
+  if (window.innerWidth > 996) return;
 
-    navbar.style.backgroundColor = "var(--background-color-mobile)";
-}
+  navbar.style.backgroundColor = "var(--background-color-mobile)";
+};
 
-menuBar.addEventListener("click", mobileMenuBehavior);
+menuBar.addEventListener("click", toggleMobileMenu);
+
+menuOverlay.addEventListener("click", closeMobileMenu);
+mobileMenuAnhors.forEach((anchor) => {
+  anchor.addEventListener("click", closeMobileMenu);
+});
+window.addEventListener("resize", closeMobileMenu);
 
 window.addEventListener("scroll", updateNavbar);
 window.addEventListener("resize", updateNavbar);
