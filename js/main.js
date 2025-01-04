@@ -2,6 +2,7 @@ const menuBar = document.querySelector(".menu-bar");
 const mobileMenu = document.querySelector(".menu-mobile");
 const menuOverlay = document.querySelector(".menu-overlay");
 const mobileMenuAnhors = document.querySelectorAll(".menu-mobile a");
+let scrollDisabled = false;
 
 const navbar = document.querySelector(".main-nav");
 const logo = document.querySelector(".logo");
@@ -11,9 +12,12 @@ const sections = document.querySelectorAll("section");
 
 const containers = document.querySelectorAll(".container");
 
-//test 
+const productsSection = document.getElementById("products-section");
+const productsWrapper = document.querySelector(".products-wrapper");
+const amountOfProductsSelector = document.getElementById("amount-of-products");
+let products = [];
 
-let scrollDisabled = false;
+//disable and enable scrolling
 
 const preventScroll = (event) => {
   if (scrollDisabled) {
@@ -24,13 +28,11 @@ const preventScroll = (event) => {
 const disableScroll = () => {
   scrollDisabled = true;
 
-  // Prevent scrolling with the mouse or touch
   window.addEventListener("wheel", preventScroll, { passive: false });
   window.addEventListener("touchmove", preventScroll, { passive: false });
 
-  // Prevent scrolling with keyboard (arrow keys, space, etc.)
   window.addEventListener("keydown", (event) => {
-    const keys = [32, 33, 34, 35, 36, 37, 38, 39, 40]; // Space, Page Up/Down, Arrows
+    const keys = [32, 33, 34, 35, 36, 37, 38, 39, 40];
     if (keys.includes(event.keyCode)) {
       preventScroll(event);
     }
@@ -46,16 +48,12 @@ const enableScroll = () => {
 };
 
 //hamburger menu
+
 const toggleMobileMenu = () => {
   mobileMenu.classList.toggle("collapse");
   menuOverlay.classList.toggle("active");
 
-  if(menuOverlay.classList.contains("active")) {
-    disableScroll()
-    console.log("has class")
-  } else {
-    enableScroll();
-  }
+  menuOverlay.classList.contains("active") ? disableScroll() : enableScroll();
 };
 
 const closeMobileMenu = () => {
@@ -136,6 +134,74 @@ const onLogoClick = () => {
   navbar.style.backgroundColor = "var(--background-color-mobile)";
 };
 
+//fetchinging data for products section
+
+const showLoading = () => {
+  const loadingDiv = document.createElement("div");
+  loadingDiv.className = "loading-spinner spinner";
+  productsWrapper.appendChild(loadingDiv);
+};
+
+const hideLoading = () => {
+  const loadingDiv = document.querySelector(".loading-spinner");
+
+  if (loadingDiv) {
+    loadingDiv.remove();
+  }
+};
+
+const fetchData = async (pageSize) => {
+  try {
+    showLoading();
+    const response = await fetch(
+      `https://brandstestowy.smallhost.pl/api/random?pageSize=${pageSize}`
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error. Status ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    hideLoading();
+    products = data.data;
+    displayProducts(products);
+
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+  }
+};
+
+const displayProducts = (products) => {
+  products.forEach((product) => {
+    const productElement = document.createElement("div");
+    productElement.className = "product";
+    productElement.setAttribute("id", product.id);
+    productElement.textContent = `ID: ${product.id}`;
+    productsWrapper.appendChild(productElement);
+  });
+};
+
+const handleSelectorChange = (e) => {
+  const pageSize = e.target.value;
+  productsWrapper.innerHTML = "";
+
+  fetchData(pageSize);
+};
+
+const productsSectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        fetchData(document.getElementById("amount-of-products").value);
+        productsSectionObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.5 }
+);
+
+productsSectionObserver.observe(productsSection);
+
 menuBar.addEventListener("click", toggleMobileMenu);
 
 menuOverlay.addEventListener("click", closeMobileMenu);
@@ -154,6 +220,10 @@ logo.addEventListener("click", onLogoClick);
 
 window.addEventListener("scroll", updateActiveLink);
 window.addEventListener("resize", updateActiveLink);
+
+amountOfProductsSelector.addEventListener("change", (e) =>
+  handleSelectorChange(e)
+);
 
 updateNavbar();
 updateNavBgColor();
