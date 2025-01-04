@@ -134,12 +134,12 @@ const onLogoClick = () => {
   navbar.style.backgroundColor = "var(--background-color-mobile)";
 };
 
-//fetchinging data for products section
+//managing data for products section
 
 const showLoading = () => {
   const loadingDiv = document.createElement("div");
   loadingDiv.className = "loading-spinner spinner";
-  productsWrapper.appendChild(loadingDiv);
+  productsSection.appendChild(loadingDiv);
 };
 
 const hideLoading = () => {
@@ -199,6 +199,8 @@ const productsSectionObserver = new IntersectionObserver(
   },
   { threshold: 0.5 }
 );
+
+// product popup
 
 productsSectionObserver.observe(productsSection);
 

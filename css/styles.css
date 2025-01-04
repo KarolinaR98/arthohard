@@ -496,6 +496,7 @@ a {
 .loading-spinner {
     font-size: 2rem;
     text-align: center;
+    width: 100%;
     margin: 0 auto;
 }
 
