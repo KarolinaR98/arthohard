@@ -1,7 +1,7 @@
 const menuBar = document.querySelector(".menu-bar");
 const mobileMenu = document.querySelector(".menu-mobile");
 const menuOverlay = document.querySelector(".menu-overlay");
-const mobileMenuAnhors = document.querySelectorAll(".menu-mobile a");
+const mobileMenuAnchors = document.querySelectorAll(".menu-mobile a");
 let scrollDisabled = false;
 
 const navbar = document.querySelector(".main-nav");
@@ -16,6 +16,7 @@ const productsSection = document.getElementById("products-section");
 const productsWrapper = document.querySelector(".products-wrapper");
 const amountOfProductsSelector = document.getElementById("amount-of-products");
 let products = [];
+let productElements = [];
 
 //disable and enable scrolling
 
@@ -165,7 +166,6 @@ const fetchData = async (pageSize) => {
     hideLoading();
     products = data.data;
     displayProducts(products);
-
   } catch (error) {
     console.error("Error fetching data: ", error);
   }
@@ -179,6 +179,15 @@ const displayProducts = (products) => {
     productElement.textContent = `ID: ${product.id}`;
     productsWrapper.appendChild(productElement);
   });
+
+  updateProductElements();
+};
+
+const updateProductElements = () => {
+  productElements = document.querySelectorAll(".product");
+  productElements.forEach((product) => {
+    product.addEventListener("click", (e) => displayProductPopup(e));
+  });
 };
 
 const handleSelectorChange = (e) => {
@@ -188,12 +197,12 @@ const handleSelectorChange = (e) => {
   fetchData(pageSize);
 };
 
-const productsSectionObserver = new IntersectionObserver(
+const productsWrapperObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         fetchData(document.getElementById("amount-of-products").value);
-        productsSectionObserver.unobserve(entry.target);
+        productsWrapperObserver.unobserve(entry.target);
       }
     });
   },
@@ -202,12 +211,39 @@ const productsSectionObserver = new IntersectionObserver(
 
 // product popup
 
-productsSectionObserver.observe(productsSection);
+const displayProductPopup = (e) => {
+  disableScroll();
+  const productId = Number(e.target.getAttribute("id"));
+  const productDetails = products.find((product) => product.id === productId);
+
+  const productPopupContainer = document.createElement("div");
+  productPopupContainer.className = "product-popup-container";
+  productPopupContainer.innerHTML = 
+
+            `<div class="popup-content">
+                <div class="popup-wrapper">
+                    <p class="popup-product-id">${productDetails.id}</p>
+                    <button class="popup-close-btn">x</button>
+                </div>
+                <p class="popup-product-name">Nazwa: ${productDetails.text}</p>
+                <p class="popup-product-value">Wartość: ${productDetails.id}</p>
+            </div>`;
+
+  document.body.appendChild(productPopupContainer);
+
+  const closeButton = document.querySelector(".popup-close-btn");
+  closeButton.addEventListener("click", () => {
+    document.body.removeChild(document.querySelector(".product-popup-container"));
+    enableScroll();
+  })
+};
+
+productsWrapperObserver.observe(productsWrapper);
 
 menuBar.addEventListener("click", toggleMobileMenu);
 
 menuOverlay.addEventListener("click", closeMobileMenu);
-mobileMenuAnhors.forEach((anchor) => {
+mobileMenuAnchors.forEach((anchor) => {
   anchor.addEventListener("click", closeMobileMenu);
 });
 window.addEventListener("resize", closeMobileMenu);
