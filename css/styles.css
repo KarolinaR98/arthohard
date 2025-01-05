@@ -151,6 +151,7 @@ a {
 .menu-item a {
     text-transform: uppercase;
     font-size: 1rem;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .menu-item a.active {
@@ -491,6 +492,7 @@ a {
     text-transform: uppercase;
     font-weight: 450;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .loading-spinner {
