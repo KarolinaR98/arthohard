@@ -182,7 +182,6 @@ const displayProducts = (products) => {
     productElement.className = "product";
     productElement.setAttribute("id", product.id);
     productElement.textContent = `ID: ${product.id}`;
-    productElement.addEventListener("click", (e) => displayProductPopup(e));
     productsWrapper.appendChild(productElement);
   });
 
@@ -259,6 +258,13 @@ logo.addEventListener("click", onLogoClick);
 
 window.addEventListener("scroll", updateActiveLink);
 window.addEventListener("resize", updateActiveLink);
+
+productsWrapper.addEventListener("click", (e) => {
+  if(e.target.classList.contains("product")){
+    console.log(e.target)
+    displayProductPopup(e);
+  }
+})
 
 amountOfProductsSelector.addEventListener("change", (e) =>
   handleSelectorChange(e)
