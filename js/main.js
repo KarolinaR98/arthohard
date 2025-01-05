@@ -15,8 +15,12 @@ const containers = document.querySelectorAll(".container");
 const productsSection = document.getElementById("products-section");
 const productsWrapper = document.querySelector(".products-wrapper");
 const amountOfProductsSelector = document.getElementById("amount-of-products");
+const bottomDetector = document.querySelector(
+  ".products-section-bottom-detector"
+);
+let pageSize = amountOfProductsSelector.value;
+let pageNumber = 1;
 let products = [];
-let productElements = [];
 
 //disable and enable scrolling
 
@@ -151,11 +155,11 @@ const hideLoading = () => {
   }
 };
 
-const fetchData = async (pageSize) => {
+const fetchData = async () => {
   try {
     showLoading();
     const response = await fetch(
-      `https://brandstestowy.smallhost.pl/api/random?pageSize=${pageSize}`
+      `https://brandstestowy.smallhost.pl/api/random?pageNumber=${pageNumber}&pageSize=10`
     );
     if (!response.ok) {
       throw new Error(`HTTP error. Status ${response.status}`);
@@ -164,8 +168,9 @@ const fetchData = async (pageSize) => {
     const data = await response.json();
 
     hideLoading();
-    products = data.data;
-    displayProducts(products);
+    products = [...products, ...data.data];
+    displayProducts(data.data);
+    pageNumber++;
   } catch (error) {
     console.error("Error fetching data: ", error);
   }
@@ -177,32 +182,26 @@ const displayProducts = (products) => {
     productElement.className = "product";
     productElement.setAttribute("id", product.id);
     productElement.textContent = `ID: ${product.id}`;
+    productElement.addEventListener("click", (e) => displayProductPopup(e));
     productsWrapper.appendChild(productElement);
   });
 
-  updateProductElements();
-};
-
-const updateProductElements = () => {
-  productElements = document.querySelectorAll(".product");
-  productElements.forEach((product) => {
-    product.addEventListener("click", (e) => displayProductPopup(e));
-  });
 };
 
 const handleSelectorChange = (e) => {
-  const pageSize = e.target.value;
+  pageSize = e.target.value;
+  pageNumber = 1;
+  products = [];
   productsWrapper.innerHTML = "";
-
-  fetchData(pageSize);
 };
 
-const productsWrapperObserver = new IntersectionObserver(
+const bottomDetectorObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        fetchData(document.getElementById("amount-of-products").value);
-        productsWrapperObserver.unobserve(entry.target);
+        if (products.length < pageSize) {
+          fetchData();
+        } else return;
       }
     });
   },
@@ -219,7 +218,6 @@ const displayProductPopup = (e) => {
   const productPopupContainer = document.createElement("div");
   productPopupContainer.className = "product-popup-container";
   productPopupContainer.innerHTML = 
-
             `<div class="popup-content">
                 <div class="popup-wrapper">
                     <p class="popup-product-id">${productDetails.id}</p>
@@ -231,14 +229,17 @@ const displayProductPopup = (e) => {
 
   document.body.appendChild(productPopupContainer);
 
-  const closeButton = document.querySelector(".popup-close-btn");
+  const closeButton = productPopupContainer.querySelector(".popup-close-btn");
+
   closeButton.addEventListener("click", () => {
-    document.body.removeChild(document.querySelector(".product-popup-container"));
+    document.body.removeChild(
+      productPopupContainer
+    );
     enableScroll();
-  })
+  });
 };
 
-productsWrapperObserver.observe(productsWrapper);
+bottomDetectorObserver.observe(bottomDetector);
 
 menuBar.addEventListener("click", toggleMobileMenu);
 
