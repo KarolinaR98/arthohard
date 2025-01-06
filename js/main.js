@@ -2,7 +2,6 @@ const menuBar = document.querySelector(".menu-bar");
 const mobileMenu = document.querySelector(".menu-mobile");
 const menuOverlay = document.querySelector(".menu-overlay");
 const mobileMenuAnchors = document.querySelectorAll(".menu-mobile a");
-let scrollDisabled = false;
 
 const navbar = document.querySelector(".main-nav");
 const logo = document.querySelector(".logo");
@@ -24,32 +23,12 @@ let products = [];
 
 //disable and enable scrolling
 
-const preventScroll = (event) => {
-  if (scrollDisabled) {
-    event.preventDefault();
-  }
-};
-
 const disableScroll = () => {
-  scrollDisabled = true;
-
-  window.addEventListener("wheel", preventScroll, { passive: false });
-  window.addEventListener("touchmove", preventScroll, { passive: false });
-
-  window.addEventListener("keydown", (event) => {
-    const keys = [32, 33, 34, 35, 36, 37, 38, 39, 40];
-    if (keys.includes(event.keyCode)) {
-      preventScroll(event);
-    }
-  });
+  document.querySelector("html").classList.add("prevent-scroll");
 };
 
 const enableScroll = () => {
-  scrollDisabled = false;
-
-  window.removeEventListener("wheel", preventScroll);
-  window.removeEventListener("touchmove", preventScroll);
-  window.removeEventListener("keydown", preventScroll);
+  document.querySelector("html").classList.remove("prevent-scroll");
 };
 
 //hamburger menu
@@ -64,10 +43,17 @@ const toggleMobileMenu = () => {
 const closeMobileMenu = () => {
   mobileMenu.classList.remove("collapse");
   menuOverlay.classList.remove("active");
-  document.body.classList.remove("no-scroll");
 
   enableScroll();
 };
+
+const updateMobileMenuOnResize = () => {
+  if(mobileMenu.classList.contains("collapse")) {
+    if(window.innerWidth > 996) {
+      closeMobileMenu();
+    }
+  }
+}
 
 //navbar size changes
 
@@ -184,7 +170,6 @@ const displayProducts = (products) => {
     productElement.textContent = `ID: ${product.id}`;
     productsWrapper.appendChild(productElement);
   });
-
 };
 
 const handleSelectorChange = (e) => {
@@ -216,8 +201,7 @@ const displayProductPopup = (e) => {
 
   const productPopupContainer = document.createElement("div");
   productPopupContainer.className = "product-popup-container";
-  productPopupContainer.innerHTML = 
-            `<div class="popup-content">
+  productPopupContainer.innerHTML = `<div class="popup-content">
                 <div class="popup-wrapper">
                     <p class="popup-product-id">${productDetails.id}</p>
                     <button class="popup-close-btn">x</button>
@@ -231,9 +215,7 @@ const displayProductPopup = (e) => {
   const closeButton = productPopupContainer.querySelector(".popup-close-btn");
 
   closeButton.addEventListener("click", () => {
-    document.body.removeChild(
-      productPopupContainer
-    );
+    document.body.removeChild(productPopupContainer);
     enableScroll();
   });
 };
@@ -246,7 +228,7 @@ menuOverlay.addEventListener("click", closeMobileMenu);
 mobileMenuAnchors.forEach((anchor) => {
   anchor.addEventListener("click", closeMobileMenu);
 });
-window.addEventListener("resize", closeMobileMenu);
+window.addEventListener("resize", updateMobileMenuOnResize);
 
 window.addEventListener("scroll", updateNavbar);
 window.addEventListener("resize", updateNavbar);
@@ -260,11 +242,11 @@ window.addEventListener("scroll", updateActiveLink);
 window.addEventListener("resize", updateActiveLink);
 
 productsWrapper.addEventListener("click", (e) => {
-  if(e.target.classList.contains("product")){
-    console.log(e.target)
+  if (e.target.classList.contains("product")) {
+    console.log(e.target);
     displayProductPopup(e);
   }
-})
+});
 
 amountOfProductsSelector.addEventListener("change", (e) =>
   handleSelectorChange(e)
