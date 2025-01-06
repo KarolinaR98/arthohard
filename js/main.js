@@ -1,3 +1,6 @@
+const DESKTOP_BREAKPOINT = 996;
+const MOBILE_BREAKPOINT = 576;
+
 const menuBar = document.querySelector(".menu-bar");
 const mobileMenu = document.querySelector(".menu-mobile");
 const menuOverlay = document.querySelector(".menu-overlay");
@@ -58,7 +61,7 @@ const updateMobileMenuOnResize = () => {
 //navbar size changes
 
 const updateNavbar = () => {
-  if (window.innerWidth >= 996) {
+  if (window.innerWidth >= DESKTOP_BREAKPOINT) {
     if (
       document.body.scrollTop > 100 ||
       document.documentElement.scrollTop > 100
@@ -69,7 +72,7 @@ const updateNavbar = () => {
       navbar.style.padding = "33px 0";
       logo.style.fontSize = "2rem";
     }
-  } else if (window.innerWidth < 996 && window.innerWidth > 576) {
+  } else if (window.innerWidth < DESKTOP_BREAKPOINT && window.innerWidth > MOBILE_BREAKPOINT) {
     navbar.style.padding = "15px 0";
     logo.style.fontSize = "1.8rem";
   } else {
@@ -104,13 +107,13 @@ const updateActiveLink = () => {
 
 //navbar background color changes for mobiles
 
-const updateNavBgColor = () => {
-  if (window.innerWidth > 996) return;
+const updateNavbarBgColor = () => {
+  if (window.innerWidth > DESKTOP_BREAKPOINT) return;
 
-  containers.forEach((section) => {
-    const rect = section.getBoundingClientRect();
+  containers.forEach((container) => {
+    const rect = container.getBoundingClientRect();
     if (rect.top <= navbar.offsetHeight && rect.bottom >= navbar.offsetHeight) {
-      if (section.parentElement.classList.contains("background-color-white")) {
+      if (container.parentElement.classList.contains("background-color-white")) {
         navbar.style.backgroundColor = "var(--white)";
       } else {
         navbar.style.backgroundColor = "var(--background-color-mobile)";
@@ -120,7 +123,7 @@ const updateNavBgColor = () => {
 };
 
 const onLogoClick = () => {
-  if (window.innerWidth > 996) return;
+  if (window.innerWidth > DESKTOP_BREAKPOINT) return;
 
   navbar.style.backgroundColor = "var(--background-color-mobile)";
 };
@@ -222,7 +225,7 @@ const displayProductPopup = (e) => {
 
 // performance optimalization 
 
-const throttle = (callback, delay = 200) => {
+const throttle = (callback, delay = 250) => {
   let shouldWait = false;
   let waitingArgs;
   const timeoutFunc = () => {
@@ -261,8 +264,8 @@ window.addEventListener("resize", throttle(updateMobileMenuOnResize));
 window.addEventListener("scroll", throttle(updateNavbar));
 window.addEventListener("resize", throttle(updateNavbar));
 
-window.addEventListener("scroll", throttle(updateNavBgColor));
-window.addEventListener("resize", throttle(updateNavBgColor));
+window.addEventListener("scroll", throttle(updateNavbarBgColor, 100));
+window.addEventListener("resize", throttle(updateNavbarBgColor, 100));
 
 logo.addEventListener("click", onLogoClick);
 
@@ -271,7 +274,6 @@ window.addEventListener("resize", throttle(updateActiveLink));
 
 productsWrapper.addEventListener("click", (e) => {
   if (e.target.classList.contains("product")) {
-    console.log(e.target);
     displayProductPopup(e);
   }
 });
@@ -281,5 +283,5 @@ amountOfProductsSelector.addEventListener("change", (e) =>
 );
 
 updateNavbar();
-updateNavBgColor();
+updateNavbarBgColor();
 updateActiveLink();

@@ -16,7 +16,7 @@ html {
 }
 
 html.prevent-scroll {
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 body {
