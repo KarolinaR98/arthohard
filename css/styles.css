@@ -261,7 +261,8 @@ a {
     height: 2px;
     background-color: var(--black);
     position: absolute;
-    right: calc(50% - 63px);
+    right: 50%;
+    transform: translate(50%);
 }
 
 .digit {
@@ -640,7 +641,7 @@ a {
 
     /*main header*/
     .main-header{
-        padding: 100px 0;
+        padding: 80px 0;
     }
 
     .header-content {
