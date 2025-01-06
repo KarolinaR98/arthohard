@@ -220,6 +220,34 @@ const displayProductPopup = (e) => {
   });
 };
 
+// performance optimalization 
+
+const throttle = (callback, delay = 200) => {
+  let shouldWait = false;
+  let waitingArgs;
+  const timeoutFunc = () => {
+    if(waitingArgs == null) {
+      shouldWait = false;
+    } else {
+      callback(...waitingArgs);
+      waitingArgs = null;
+      setTimeout(timeoutFunc, delay);
+    }
+  }
+
+  return (...args) => {
+    if(shouldWait) {
+      waitingArgs = args;
+      return
+    }
+
+    callback(...args)
+    shouldWait = true; 
+
+    setTimeout(timeoutFunc, delay)
+  }
+}
+
 bottomDetectorObserver.observe(bottomDetector);
 
 menuBar.addEventListener("click", toggleMobileMenu);
@@ -228,18 +256,18 @@ menuOverlay.addEventListener("click", closeMobileMenu);
 mobileMenuAnchors.forEach((anchor) => {
   anchor.addEventListener("click", closeMobileMenu);
 });
-window.addEventListener("resize", updateMobileMenuOnResize);
+window.addEventListener("resize", throttle(updateMobileMenuOnResize));
 
-window.addEventListener("scroll", updateNavbar);
-window.addEventListener("resize", updateNavbar);
+window.addEventListener("scroll", throttle(updateNavbar));
+window.addEventListener("resize", throttle(updateNavbar));
 
-window.addEventListener("scroll", updateNavBgColor);
-window.addEventListener("resize", updateNavBgColor);
+window.addEventListener("scroll", throttle(updateNavBgColor));
+window.addEventListener("resize", throttle(updateNavBgColor));
 
 logo.addEventListener("click", onLogoClick);
 
-window.addEventListener("scroll", updateActiveLink);
-window.addEventListener("resize", updateActiveLink);
+window.addEventListener("scroll", throttle(updateActiveLink));
+window.addEventListener("resize", throttle(updateActiveLink));
 
 productsWrapper.addEventListener("click", (e) => {
   if (e.target.classList.contains("product")) {
