@@ -22,6 +22,7 @@ const bottomDetector = document.querySelector(
 );
 let pageSize = amountOfProductsSelector.value;
 let pageNumber = 1;
+let hasMoreData = true;
 let products = [];
 
 //disable and enable scrolling
@@ -51,12 +52,12 @@ const closeMobileMenu = () => {
 };
 
 const updateMobileMenuOnResize = () => {
-  if(mobileMenu.classList.contains("collapse")) {
-    if(window.innerWidth > 996) {
+  if (mobileMenu.classList.contains("collapse")) {
+    if (window.innerWidth > 996) {
       closeMobileMenu();
     }
   }
-}
+};
 
 //navbar size changes
 
@@ -72,7 +73,10 @@ const updateNavbar = () => {
       navbar.style.padding = "33px 0";
       logo.style.fontSize = "2rem";
     }
-  } else if (window.innerWidth < DESKTOP_BREAKPOINT && window.innerWidth > MOBILE_BREAKPOINT) {
+  } else if (
+    window.innerWidth < DESKTOP_BREAKPOINT &&
+    window.innerWidth > MOBILE_BREAKPOINT
+  ) {
     navbar.style.padding = "15px 0";
     logo.style.fontSize = "1.8rem";
   } else {
@@ -113,7 +117,9 @@ const updateNavbarBgColor = () => {
   containers.forEach((container) => {
     const rect = container.getBoundingClientRect();
     if (rect.top <= navbar.offsetHeight && rect.bottom >= navbar.offsetHeight) {
-      if (container.parentElement.classList.contains("background-color-white")) {
+      if (
+        container.parentElement.classList.contains("background-color-white")
+      ) {
         navbar.style.backgroundColor = "var(--white)";
       } else {
         navbar.style.backgroundColor = "var(--background-color-mobile)";
@@ -148,7 +154,7 @@ const fetchData = async () => {
   try {
     showLoading();
     const response = await fetch(
-      `https://brandstestowy.smallhost.pl/api/random?pageNumber=${pageNumber}&pageSize=10`
+      `https://brandstestowy.smallhost.pl/api/random?pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
     if (!response.ok) {
       throw new Error(`HTTP error. Status ${response.status}`);
@@ -159,7 +165,14 @@ const fetchData = async () => {
     hideLoading();
     products = [...products, ...data.data];
     displayProducts(data.data);
-    pageNumber++;
+
+    if (data.currentPage < data.totalPages) {
+      pageNumber++;
+      hasMoreData = true;
+    } else {
+      hasMoreData = false;
+    }
+
   } catch (error) {
     console.error("Error fetching data: ", error);
   }
@@ -178,6 +191,7 @@ const displayProducts = (products) => {
 const handleSelectorChange = (e) => {
   pageSize = e.target.value;
   pageNumber = 1;
+  hasMoreData = true;
   products = [];
   productsWrapper.innerHTML = "";
 };
@@ -186,7 +200,7 @@ const bottomDetectorObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        if (products.length < pageSize) {
+        if (hasMoreData) {
           fetchData();
         } else return;
       }
@@ -223,33 +237,33 @@ const displayProductPopup = (e) => {
   });
 };
 
-// performance optimalization 
+// performance optimalization
 
 const throttle = (callback, delay = 250) => {
   let shouldWait = false;
   let waitingArgs;
   const timeoutFunc = () => {
-    if(waitingArgs == null) {
+    if (waitingArgs == null) {
       shouldWait = false;
     } else {
       callback(...waitingArgs);
       waitingArgs = null;
       setTimeout(timeoutFunc, delay);
     }
-  }
+  };
 
   return (...args) => {
-    if(shouldWait) {
+    if (shouldWait) {
       waitingArgs = args;
-      return
+      return;
     }
 
-    callback(...args)
-    shouldWait = true; 
+    callback(...args);
+    shouldWait = true;
 
-    setTimeout(timeoutFunc, delay)
-  }
-}
+    setTimeout(timeoutFunc, delay);
+  };
+};
 
 bottomDetectorObserver.observe(bottomDetector);
 
